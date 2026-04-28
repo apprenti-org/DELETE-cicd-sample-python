@@ -1,0 +1,24 @@
+name: deploy
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to deploy (e.g., v0.1.0)'
+        required: true
+        default: 'v0.1.0'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag || github.ref_name }}
+      - name: Simulate deploy
+        run: |
+          echo "Deploying tag ${{ github.event.inputs.tag || github.ref_name }} to staging..."
+          sleep 2
+          echo "Deploy completed (simulated)."

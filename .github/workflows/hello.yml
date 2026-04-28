@@ -1,0 +1,17 @@
+name: hello
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Baseline check
+        run: |
+          echo "Baseline workflow running on $(uname -s)."
+          echo "This job is named 'test' so Lesson 1's branch-protection setup"
+          echo "can require it as a status check from the dropdown."
